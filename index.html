@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExamGenius - AI-Powered Exam Preparation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50 min-h-screen font-sans">
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="flex items-center justify-center min-h-screen p-4">
+        <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-gray-100 transform transition-all duration-500 hover:scale-[1.02]">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">ExamGenius</h1>
+                <p class="text-gray-500">AI-powered exam preparation</p>
+            </div>
+            
+            <div id="login-form" class="space-y-4">
+                <h2 class="text-xl font-semibold text-gray-700 mb-2">Welcome back!</h2>
+                <div>
+                    <label class="block text-gray-600 text-sm mb-1">Email</label>
+                    <input type="email" id="login-email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                </div>
+                <div>
+                    <label class="block text-gray-600 text-sm mb-1">Password</label>
+                    <input type="password" id="login-password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                </div>
+                <button id="login-btn" class="w-full bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all transform hover:scale-[1.01] shadow-md flex items-center justify-center">
+                    <span id="login-btn-text">Login</span>
+                    <svg id="login-spinner" class="animate-spin -mr-1 ml-2 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
+                <p class="text-center text-gray-500 text-sm mt-4">Don't have an account? <button id="show-signup" class="text-blue-500 font-medium hover:text-blue-600">Sign up</button></p>
+            </div>
+            
+            <div id="signup-form" class="space-y-4 hidden">
+                <h2 class="text-xl font-semibold text-gray-700 mb-2">Create your account</h2>
+                <div>
+                    <label class="block text-gray-600 text-sm mb-1">Full Name</label>
+                    <input type="text" id="signup-name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                </div>
+                <div>
+                    <label class="block text-gray-600 text-sm mb-1">Email</label>
+                    <input type="email" id="signup-email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                </div>
+                <div>
+                    <label class="block text-gray-600 text-sm mb-1">Password</label>
+                    <input type="password" id="signup-password" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all">
+                </div>
+                <button id="signup-btn" class="w-full bg-gradient-to-r from-green-500 to-teal-600 text-white py-3 rounded-lg hover:from-green-600 hover:to-teal-700 transition-all transform hover:scale-[1.01] shadow-md flex items-center justify-center">
+                    <span id="signup-btn-text">Sign Up</span>
+                    <svg id="signup-spinner" class="animate-spin -mr-1 ml-2 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                </button>
+                <p class="text-center text-gray-500 text-sm mt-4">Already have an account? <button id="show-login" class="text-blue-500 font-medium hover:text-blue-600">Login</button></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App (hidden initially) -->
+    <div id="app" class="hidden min-h-screen">
+        <!-- Navigation Bar -->
+        <nav class="bg-white shadow-sm py-3 px-6 flex justify-between items-center sticky top-0 z-10">
+            <div class="flex items-center space-x-2">
+                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h1 class="text-xl font-bold text-gray-800">ExamGenius</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="chatbot-nav-btn" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-all relative group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse hidden" id="chat-notification">1</span>
+                    <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity">AI Tutor</span>
+                </button>
+                <button id="logout-btn" class="flex items-center space-x-1 text-gray-600 hover:text-gray-800 transition-colors group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                    </svg>
+                    <span class="hidden md:inline-block group-hover:underline">Logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <div class="container mx-auto px-4 py-6 max-w-6xl">
+            <!-- Subject Selection -->
+            <div id="subject-selection" class="animate__animated animate__fadeIn">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-2">What would you like to practice today?</h2>
+                    <p class="text-gray-600 max-w-lg mx-auto">Select a subject to generate personalized practice questions with our AI tutor</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <button data-subject="math" class="subject-btn bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100 hover:border-blue-200 transform hover:-translate-y-1 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Mathematics</h3>
+                        <p class="text-sm text-gray-500 text-center">Algebra, Calculus, Geometry, Statistics</p>
+                    </button>
+                    
+                    <button data-subject="science" class="subject-btn bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100 hover:border-green-200 transform hover:-translate-y-1 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">Science</h3>
+                        <p class="text-sm text-gray-500 text-center">Physics, Chemistry, Biology, Earth Science</p>
+                    </button>
+                    
+                    <button data-subject="history" class="subject-btn bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-100 hover:border-yellow-200 transform hover:-translate-y-1 flex flex-col items-center">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-1">History</h3>
+                        <p class="text-sm text-gray-500 text-center">World History, US History, Ancient Civilizations</p>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Feedback Button -->
+            <style>
+                #feedback-form {
+                    display: none; /* Initially hidden */
+                    transition: all 0.3s ease; /* Smooth transition */
+                }
+                #feedback-btn:hover + #feedback-form {
+                    display: block; /* Show on hover */
+                }
+            </style>
+        
+            <div id="feedback-btn" class="fixed bottom-4 right-4 bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-3 rounded-full shadow-lg cursor-pointer hover:from-blue-600 hover:to-indigo-700 transition-all transform hover:scale-[1.05] animate__animated animate__fadeIn">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h8m-8 4h8m2 4H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2z" />
+                </svg>
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center animate-pulse">1</span>
+                <span class="absolute -bottom-8 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity">Feedback</span>
+            </div>
+        
+            <!-- Feedback Form -->
+            <div id="feedback-form" class="fixed bottom-16 right-4 bg-white p-5 rounded-lg shadow-lg z-50">
+                <h2 class="text-lg font-bold mb-4">Feedback Form</h2>
+                <form id="form" action="" method="POST">
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                        <input type="text" id="name" name="name" required class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+                    </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+                    </div>
+                    <div class="mb-4">
+                        <label for="feedback" class="block text-sm font-medium text-gray-700">Feedback</label>
+                        <textarea id="feedback" name="feedback" rows="4" required class="mt-1 block w-full border border-gray-300 rounded-md p-2"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600 transition">Submit</button>
+                </form>
+            </div>
+        
+            <script>
+                // Show feedback form on button click
+                document.getElementById('feedback-btn').onclick = function() {
+                    const form = document.getElementById('feedback-form');
+                    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+                };
+            </script>
+
+
+            <!-- Test Configuration -->
+            <div id="test-config" class="hidden animate__animated animate__fadeIn">
+                <div class="bg-white rounded-xl shadow-md p-6 max-w-lg mx-auto border border-gray-100">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Test Setup</h2>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Subject</label>
+                            <div class="flex items-center space-x-2 bg-gray-50 px-4 py-3 rounded-lg">
+                                <div id="subject-icon" class="w-6 h-6 rounded-full flex items-center justify-center"></div>
+                                <span id="selected-subject" class="font-medium"></span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Number of Questions</label>
+                            <div class="grid grid-cols-4 gap-2">
+                                <button data-count="5" class="count-btn py-2 rounded-lg border border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition-all">5</button>
+                                <button data-count="10" class="count-btn py-2 rounded-lg border border-gray-300 bg-blue-100 border-blue-500">10</button>
+                                <button data-count="15" class="count-btn py-2 rounded-lg border border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition-all">15</button>
+                                <button data-count="20" class="count-btn py-2 rounded-lg border border-gray-300 hover:border-blue-500 hover:bg-blue-50 transition-all">20</button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Difficulty Level</label>
+                            <div class="grid grid-cols-3 gap-2">
+                                <button data-difficulty="easy" class="difficulty-btn py-2 rounded-lg border border-gray-300 hover:border-green-500 hover:bg-green-50 transition-all">
+                                    <span class="block">Easy</span>
+                                    <span class="text-xs text-gray-500">Beginner</span>
+                                </button>
+                                <button data-difficulty="medium" class="difficulty-btn py-2 rounded-lg border border-gray-300 bg-green-100 border-green-500">
+                                    <span class="block">Medium</span>
+                                    <span class="text-xs text-gray-500">Intermediate</span>
+                                </button>
+                                <button data-difficulty="hard" class="difficulty-btn py-2 rounded-lg border border-gray-300 hover:border-green-500 hover:bg-green-50 transition-all">
+                                    <span class="block">Hard</span>
+                                    <span class="text-xs text-gray-500">Advanced</span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Time Limit (minutes)</label>
+                            <div class="flex items-center space-x-2">
+                                <button id="decrease-time" class="p-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4" />
+                                    </svg>
+                                </button>
+                                <input type="number" id="time-limit" value="30" min="5" max="120" class="flex-1 px-3 py-2 rounded-lg border border-gray-300 text-center">
+                                <button id="increase-time" class="p-2 rounded-lg border border-gray-300 hover:bg-gray-100 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button id="generate-test" class="w-full mt-6 bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-3 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all transform hover:scale-[1.01] shadow-md flex items-center justify-center">
+                            <span id="generate-btn-text">Generate Test</span>
+                            <svg id="generate-spinner" class="animate-spin -mr-1 ml-2 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Test Interface -->
+            <div id="test-interface" class="hidden animate__animated animate__fadeIn">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6 border border-gray-100">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center p-4 border-b border-gray-200 bg-gray-50">
+                        <div>
+                            <h2 id="test-title" class="text-xl font-bold text-gray-800"></h2>
+                            <div class="flex items-center space-x-2 mt-1">
+                                <span id="question-counter" class="text-sm text-gray-600"></span>
+                                <span class="text-gray-400">•</span>
+                                <span id="test-difficulty" class="text-sm px-2 py-0.5 rounded-full"></span>
+                            </div>
+                        </div>
+                        <div id="test-timer" class="mt-2 md:mt-0 bg-white px-3 py-1 rounded-full border border-gray-300 shadow-sm flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span class="font-medium">00:00</span>
+                        </div>
+                    </div>
+                    
+                    <div id="test-questions" class="p-4 md:p-6 divide-y divide-gray-100">
+                        <!-- Questions will be inserted here -->
+                    </div>
+                    
+                    <div class="p-4 border-t border-gray-200 bg-gray-50">
+                        <button id="submit-test" class="w-full md:w-auto bg-gradient-to-r from-green-500 to-teal-600 text-white py-2 px-6 rounded-lg hover:from-green-600 hover:to-teal-700 transition-all shadow-md flex items-center justify-center mx-auto">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results-section" class="hidden animate__animated animate__fadeIn">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden mb-6 border border-gray-100">
+                    <div class="p-6 border-b border-gray-200 bg-gray-50">
+                        <h2 class="text-xl font-bold text-gray-800">Test Results</h2>
+                    </div>
+                    
+                    <div class="p-6">
+                        <div class="flex flex-col md:flex-row justify-between items-center mb-6">
+                            <div class="w-full md:w-1/2 mb-6 md:mb-0">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="text-gray-700 font-medium">Your Score:</span>
+                                    <span id="test-score" class="text-2xl font-bold text-blue-600">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-4 mb-4">
+                                    <div id="score-bar" class="bg-gradient-to-r from-blue-500 to-indigo-600 h-4 rounded-full transition-all duration-1000" style="width: 0%"></div>
+                                </div>
+                                
+                                <div id="test-feedback" class="text-gray-700">
+                                    <!-- Feedback will be inserted here -->
+                                </div>
+                            </div>
+                            
+                            <div class="w-full md:w-1/2 md:pl-6">
+                                <div class="bg-gray-50 p-4 rounded-lg">
+                                    <div class="grid grid-cols-3 gap-2 text-center">
+                                        <div class="p-2">
+                                            <div class="text-2xl font-bold text-blue-600" id="correct-count">0</div>
+                                            <div class="text-xs text-gray-500">Correct</div>
+                                        </div>
+                                        <div class="p-2">
+                                            <div class="text-2xl font-bold text-red-600" id="incorrect-count">0</div>
+                                            <div class="text-xs text-gray-500">Incorrect</div>
+                                        </div>
+                                        <div class="p-2">
+                                            <div class="text-2xl font-bold text-gray-600" id="time-taken">0:00</div>
+                                            <div class="text-xs text-gray-500">Time Taken</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="question-review" class="mt-6">
+                            <h3 class="font-bold text-gray-800 mb-4">Question Review</h3>
+                            <!-- Question review will be inserted here -->
+                        </div>
+                    </div>
+                    
+                    <div class="p-4 border-t border-gray-200 bg-gray-50">
+                        <button id="new-test-btn" class="w-full md:w-auto bg-gradient-to-r from-blue-500 to-indigo-600 text-white py-2 px-6 rounded-lg hover:from-blue-600 hover:to-indigo-700 transition-all shadow-md flex items-center justify-center mx-auto">
+                            Start New Test
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chatbot Overlay -->
+        <div id="chatbot-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden"></div>
+        
+        <!-- Chatbot Interface -->
+        <div id="chatbot-container" class="fixed bottom-0 right-0 w-full md:w-96 h-[80vh] md:h-[70vh] bg-white shadow-xl rounded-t-2xl z-30 transform translate-y-full transition-transform duration-300">
+            <div class="flex justify-between items-center p-4 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-t-2xl">
+                <h3 class="text-white font-semibold">AI Exam Tutor</h3>
+                <button id="chatbot-close" class="text-white hover:text-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            <div id="chatbot-messages" class="h-[calc(100%-120px)] p-4 overflow-y-auto space-y-3">
+                <div class="flex justify-start">
+                    <div class="max-w-xs md:max-w-md bg-blue-100 p-3 rounded-lg rounded-tl-none">
+                        <p>Hello! I'm your AI Exam Tutor. I can help explain concepts, provide study tips, and clarify any questions you have about your practice tests.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 bg-white">
+                <div class="flex items-center">
+                    <input id="chatbot-input" type="text" placeholder="Ask me anything about exams..." class="flex-1 px-4 py-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
+                    <button id="chatbot-send" class="bg-blue-500 text-white px-4 py-2 rounded-r-lg hover:bg-blue-600 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api-service.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/test-generator.js"></script>
+    <script src="js/chatbot.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
